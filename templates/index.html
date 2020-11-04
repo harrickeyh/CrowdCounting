@@ -1,404 +1,250 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Industrious by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
 <html>
-<style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-    
-    body {
-        font-family: monospace;
-    }
-    
-    .container {
-        position: relative;
-        top: 20px;
-        margin: 15px;
-    }
-    
-    .row {
-        width: 100%;
-    }
-    
-    .menu-title {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    
-    .item {
-        position: relative;
-        top: 0px;
-        margin: 15px;
-        padding: 25px;
-        border: 3px solid black;
-        background: rgb(104, 124, 238);
-    }
-    
-    .item_2 {
-        position: relative;
-        top: 0px;
-        margin: 15px;
-        padding: 25px;
-        border: 3px solid black;
-        background: white;
-    }
-    
-    .item-title {
-        position: absolute;
-        top: -1px;
-        right: -1px;
-        background: salmon;
-        color: blanchedalmond;
-        padding: 7px;
-        border-left: 2px solid #000;
-        border-bottom: 2px solid #000;
-    }
-    
-    .item p {
-        margin-top: 18px;
-        text-align: left;
-        font-size: 150%;
-    }
-    /* Simple Responsive Framework. */
-    /*------ Desktop ------*/
-    
-    @media (min-width: 992px) {
-        .col-lg-1,
-        .col-lg-2,
-        .col-lg-3,
-        .col-lg-4,
-        .col-lg-5,
-        .col-lg-6,
-        .col-lg-7,
-        .col-lg-8,
-        .col-lg-9,
-        .col-lg-10,
-        .col-lg-11,
-        .col-lg-12 {
-            float: left;
-        }
-        .col-lg-1 {
-            width: 8.33%;
-        }
-        .col-lg-2 {
-            width: 16.66%;
-        }
-        .col-lg-3 {
-            width: 25%;
-        }
-        .col-lg-4 {
-            width: 33.33%;
-        }
-        .col-lg-5 {
-            width: 41.66%;
-        }
-        .col-lg-6 {
-            width: 50%;
-        }
-        .col-lg-7 {
-            width: 58.33%;
-        }
-        .col-lg-8 {
-            width: 66.66%;
-        }
-        .col-lg-9 {
-            width: 74.99%;
-        }
-        .col-lg-10 {
-            width: 83.33%;
-        }
-        .col-lg-11 {
-            width: 91.66%;
-        }
-        .col-lg-12 {
-            width: 100%;
-        }
-    }
-    /*------ Tablet ------*/
-    
-    @media (min-width: 768px) and (max-width: 991px) {
-        .col-lg-4 {
-            width: 50%;
-            float: left;
-        }
-        .col-lg-tablet {
-            width: 100%;
-            float: left;
-        }
-    }
-    /*------ Mobile ------*/
-    
-    @media (max-width: 767px) {
-        .col-lg-4 {
-            width: 100%;
-            float: left;
-        }
-    }
-    
-    .drop-zone {
-        margin-top: 30px;
-        width: auto;
-        height: 300px;
-        padding: 25px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        font-family: "Quicksand", sans-serif;
-        font-weight: 500;
-        font-size: 20px;
-        cursor: pointer;
-        color: white;
-        border: 4px dashed salmon;
-        border-radius: 10px;
-    }
-    
-    .drop-zone--over {
-        border-style: solid;
-    }
-    
-    .drop-zone__input {
-        display: none;
-    }
-    
-    .drop-zone__thumb {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        overflow: hidden;
-        background-color: #cccccc;
-        background-size: cover;
-        position: relative;
-    }
-    
-    .drop-zone__thumb::after {
-        content: attr(data-label);
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 5px 0;
-        color: #ffffff;
-        background: rgba(0, 0, 0, 0.75);
-        font-size: 14px;
-        text-align: center;
-    }
-    
-    input[type=submit] {
-        background-color: white;
-        border: 2px dashed salmon;
-        color: black;
-        padding: 8px 16px;
-        text-decoration: none;
-        margin: 4px 2px;
-        cursor: pointer;
-        width: 100%;
-    }
-    
-    .get-zone {
-        margin-top: 30px;
-        width: auto;
-        height: 300px;
-        padding: 25px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        font-family: "Quicksand", sans-serif;
-        font-weight: 500;
-        font-size: 20px;
-        cursor: pointer;
-        color: white;
-        border: 4px dashed white;
-        border-radius: 10px;
-    }
-</style>
+	<head>
+		<title>E056 DIP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="static/assets/css/main.css" />
+	</head>
+	<body class="is-preload">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DIP056 Crowd Counting</title>
-    <link href='css/style.css' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {
-            packages: ["orgchart"]
-        });
-        google.charts.setOnLoadCallback(drawChart);
+		<!-- Header -->
+			<header id="header">
+				<a class="logo" href="index.html">E056 DIP</a>
+				<nav>
+					<a href="#menu">Menu</a>
+				</nav>
+			</header>
 
-        function drawChart() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Name');
-            data.addColumn('string', 'Manager');
-            data.addColumn('string', 'ToolTip');
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="implement.html">Implementation</a></li>
+					<li><a href="others.html">Others</a></li>
+				</ul>
+			</nav>
 
-            // For each orgchart box, provide the name, manager, and tooltip to show.
-            data.addRows([
-                [{
-                        'v': 'Start',
-                        'f': '<div style="color:red; font-style:bold">User Interface</div>Upload Image'
-                    },
-                    '<div style="color:red; font-style:bold">Start</div>', 'The President'
-                ],
-                [{
-                        'v': 'Frontend',
-                        'f': '<div style="color:red; font-style:bold">Frontend</div>Fetch to Backend'
-                    },
-                    'Start', ''
-                ],
-                [{
-                        'v': 'Backend',
-                        'f': '<div style="color:red; font-style:bold">Backend</div>Counting algorithm'
-                    },
-                    'Frontend', ''
-                ],
-                [{
-                        'v': 'Overlay',
-                        'f': '<div style="color:red; font-style:bold">Backend</div>Apply overlay & sendback to Frontend'
-                    },
-                    'Backend', ''
-                ],
-                [{
-                        'v': 'Send',
-                        'f': '<div style="color:red; font-style:bold">Frontend</div>Fetch & display to User interface'
-                    },
-                    'Overlay', ''
-                ],
-                [{
-                        'v': 'End',
-                        'f': '<div style="color:red; font-style:bold">End</div>'
-                    },
-                    'Send', ''
-                ],
-                ['', '', ''],
-                ['', '', ''],
-                ['', '', '']
-            ]);
+		<!-- Banner -->
+			<section id="banner">
+				<div class="inner">
+					<h1>Design Innovation Project</h1>
+					<p>Crowd Counting</p>
+				</div>
+				<video autoplay loop muted playsinline src="static/images/banner.mp4"></video>
+			</section>
 
-            // Create the chart.
-            var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
-            // Draw the chart, setting the allowHtml option to true for the tooltips.
-            chart.draw(data, {
-                'allowHtml': true
-            });
-        }
-    </script>
-</head>
+		<!-- Highlights -->
+			<section class="wrapper">
+				<div class="inner">
+					<header class="special">
+						<h2>Introduction to our team members!</h2>
+						<p>Summary of our team.</p>
+					</header>
+					<div class="highlights">
+						<section>
+							<div class="content">
+								<header>
+									<h3>Name 1</h3>
+								</header>
+								<p>Write a little something</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<h3>Name 2</h3>
+								</header>
+								<p>Write a little something</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<h3>Name 3</h3>
+								</header>
+								<p>Write a little something</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<h3>Name 4</h3>
+								</header>
+								<p>Write a little something</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<h3>Name 5</h3>
+								</header>
+								<p>Write a little something</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<h3>Name 6</h3>
+								</header>
+								<p>Write a little something</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<h3>Name 7</h3>
+								</header>
+								<p>Write a little something</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<h3>Name 8</h3>
+								</header>
+								<p>Write a little something</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<h3>Name 9</h3>
+								</header>
+								<p>Write a little something</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<h3>Name 10</h3>
+								</header>
+								<p>Write a little something</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<h3>Name 11</h3>
+								</header>
+								<p>Write a little something</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<h3>Name 12</h3>
+								</header>
+								<p>Write a little something</p>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
 
-<body>
-    <div class="container">
-        <div class="row">
-            <h1 class="menu-title">DIP056 Crowd Counting</h1>
-            <div class="col-lg-4">
-                <div class="item">
-                    <div class="item-title">
-                        <h2>Upload your Image!</h2>
-                    </div>
-                    <form method="post" enctype="multipart/form-data">
-                        <div class="drop-zone">
-                            <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                            <input type="file" name="myFile" class="drop-zone__input">
-                        </div>
-                        <p><input type="submit" value="Upload Image" name="submit"></p>
-                    </form>
-                    <script type="text/javascript">
-                        document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
-                            const dropZoneElement = inputElement.closest(".drop-zone");
+		<!-- CTA -->
+			<section id="cta" class="wrapper">
+				<div class="inner">
+					<h2>Croud Counting is about</h2>
+					<p>Summary of crowd counting. can change background pic</p>
+				</div>
+			</section>
 
-                            dropZoneElement.addEventListener("click", (e) => {
-                                inputElement.click();
-                            });
+		<!-- Testimonials -->
+			<section class="wrapper">
+				<div class="inner">
+					<header class="special">
+						<h2>We can write something here too</h2>
+						<p>What to write I not sure</p>
+					</header>
+					<div class="testimonials">
+						<section>
+							<div class="content">
+								<blockquote>
+									<p>Or instead of above we can introduce our team member here too. Here is Justin!</p>
+								</blockquote>
+								<div class="author">
+									<div class="image">
+										<img src="static/images/pic01.jpg" alt="" />
+									</div>
+									<p class="credit">- <strong>Justin</strong> <span>Our Lovely Secretary</span></p>
+								</div>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<blockquote>
+									<p>Hello World!</p>
+								</blockquote>
+								<div class="author">
+									<div class="image">
+										<img src="static/images/pic03.jpg" alt="" />
+									</div>
+									<p class="credit">- <strong>Spongebob</strong> <span>Bikini Bottom Hotstar</span></p>
+								</div>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<blockquote>
+									<p>Thats me! hehehee</p>
+								</blockquote>`
+								<div class="author">
+									<div class="image">
+										<img src="static/images/pic02.jpg" alt="" />
+									</div>
+									<p class="credit">- <strong>Aidil</strong> <span>Am always hungry</span></p>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
 
-                            inputElement.addEventListener("change", (e) => {
-                                if (inputElement.files.length) {
-                                    updateThumbnail(dropZoneElement, inputElement.files[0]);
-                                }
-                            });
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="content">
+						<section>
+							<h3>Thank You (This is the Footer)</h3>
+							<p>What to put here?</p>
+						</section>
+						<section>
+							<h4>We can add things here too</h4>
+							<ul class="alt">
+								<li><a href="#">Example 1</a></li>
+								<li><a href="#">Example 2</a></li>
+								<li><a href="#">Example 3</a></li>
+								<li><a href="#">Example 4</a></li>
+							</ul>
+						</section>
+						<section>
+							<h4>Social Media/h4>
+							<ul class="plain">
+								<li><a href="#"><i class="icon fa-twitter">&nbsp;</i>Twitter</a></li>
+								<li><a href="#"><i class="icon fa-facebook">&nbsp;</i>Facebook</a></li>
+								<li><a href="#"><i class="icon fa-instagram">&nbsp;</i>Instagram</a></li>
+								<li><a href="#"><i class="icon fa-github">&nbsp;</i>Github</a></li>
+							</ul>
+						</section>
+					</div>
+					
+				</div>
+			</footer>
 
-                            dropZoneElement.addEventListener("dragover", (e) => {
-                                e.preventDefault();
-                                dropZoneElement.classList.add("drop-zone--over");
-                            });
+		<!-- Scripts -->
+			<script src="static/assets/js/jquery.min.js"></script>
+			<script src="static/assets/js/browser.min.js"></script>
+			<script src="static/assets/js/breakpoints.min.js"></script>
+			<script src="static/assets/js/util.js"></script>
+			<script src="static/assets/js/main.js"></script>
 
-                            ["dragleave", "dragend"].forEach((type) => {
-                                dropZoneElement.addEventListener(type, (e) => {
-                                    dropZoneElement.classList.remove("drop-zone--over");
-                                });
-                            });
-
-                            dropZoneElement.addEventListener("drop", (e) => {
-                                e.preventDefault();
-
-                                if (e.dataTransfer.files.length) {
-                                    inputElement.files = e.dataTransfer.files;
-                                    updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-                                }
-
-                                dropZoneElement.classList.remove("drop-zone--over");
-                            });
-                        });
-
-                        /**
-                         * Updates the thumbnail on a drop zone element.
-                         *
-                         * @param {HTMLElement} dropZoneElement
-                         * @param {File} file
-                         */
-                        function updateThumbnail(dropZoneElement, file) {
-                            let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
-
-                            // First time - remove the prompt
-                            if (dropZoneElement.querySelector(".drop-zone__prompt")) {
-                                dropZoneElement.querySelector(".drop-zone__prompt").remove();
-                            }
-
-                            // First time - there is no thumbnail element, so lets create it
-                            if (!thumbnailElement) {
-                                thumbnailElement = document.createElement("div");
-                                thumbnailElement.classList.add("drop-zone__thumb");
-                                dropZoneElement.appendChild(thumbnailElement);
-                            }
-
-                            thumbnailElement.dataset.label = file.name;
-
-                            // Show thumbnail for image files
-                            if (file.type.startsWith("image/")) {
-                                const reader = new FileReader();
-
-                                reader.readAsDataURL(file);
-                                reader.onload = () => {
-                                    thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
-                                };
-                            } else {
-                                thumbnailElement.style.backgroundImage = null;
-                            }
-                        }
-                    </script>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="item_2">
-                    <div class="item-title">
-                        <h2>How it works!</h2>
-                    </div>
-                    <div id="chart_div"></div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-lg-tablet ">
-                <div class="item">
-                    <div class="item-title">
-                        <h2>The returned density Image!</h2>
-                    </div>
-                    <div class="get-zone">
-                        <img src="/uploads/1.jpg" alt="1.jpeg" style="width:128px;height:128px;">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</body>
-
+	</body>
 </html>

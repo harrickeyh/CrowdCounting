@@ -1,0 +1,272 @@
+<!DOCTYPE HTML>
+<!--
+	Industrious by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<style>
+	#result{font-weight: bold;}
+</style>
+<html>
+	<head>
+		<title>Implementation</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="static/assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<a class="logo" href="index.html">E056 DIP</a>
+				<nav>
+					<a href="#menu">Menu</a>
+				</nav>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="implement.html">Implementation</a></li>
+					<li><a href="others.html">Others</a></li>
+				</ul>
+			</nav>
+
+		<!-- Heading -->
+			<div id="heading" >
+				<h1>Implementation</h1>
+			</div>
+
+			<section class="wrapper">
+				<div class="inner">
+					<header class="special">
+						<h2>Introduction to our team members!</h2>
+						<p>Summary of our team.</p>
+					</header>
+					<div class="highlights">
+						<section>
+							<div class="content">
+								<header>
+									<h3>Upload</h3>
+								</header>
+								<form method="post" enctype="multipart/form-data">
+									<div class="drop-zone">
+										<span class="drop-zone__prompt">Drop file here or click to upload</span>
+										<input type="file" name="file" class="drop-zone__input" id="input-file">
+									</div>
+									<p><input type="submit" value="Upload Image" name="submit" id="upload-file" onclick=predict()></p>
+			
+									<script type="text/javascript">
+										const realFileBtn = document.getElementById("input-file");
+			
+										document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+											const dropZoneElement = inputElement.closest(".drop-zone");
+			
+											dropZoneElement.addEventListener("click", (e) => {
+												inputElement.click();
+											});
+			
+											inputElement.addEventListener("change", (e) => {
+												if (inputElement.files.length) {
+													updateThumbnail(dropZoneElement, inputElement.files[0]);
+												}
+											});
+			
+											dropZoneElement.addEventListener("dragover", (e) => {
+												e.preventDefault();
+												dropZoneElement.classList.add("drop-zone--over");
+											});
+			
+											["dragleave", "dragend"].forEach((type) => {
+												dropZoneElement.addEventListener(type, (e) => {
+													dropZoneElement.classList.remove("drop-zone--over");
+												});
+											});
+			
+											dropZoneElement.addEventListener("drop", (e) => {
+												e.preventDefault();
+			
+												if (e.dataTransfer.files.length) {
+													inputElement.files = e.dataTransfer.files;
+													updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+												}
+			
+												dropZoneElement.classList.remove("drop-zone--over");
+											});
+										});
+			
+										/**
+										 * Updates the thumbnail on a drop zone element.
+										 *
+										 * @param {HTMLElement} dropZoneElement
+										 * @param {File} file
+										 */
+			
+										function updateThumbnail(dropZoneElement, file) {
+											let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+			
+											// First time - remove the prompt
+											if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+												dropZoneElement.querySelector(".drop-zone__prompt").remove();
+											}
+			
+											// First time - there is no thumbnail element, so lets create it
+											if (!thumbnailElement) {
+												thumbnailElement = document.createElement("div");
+												thumbnailElement.classList.add("drop-zone__thumb");
+												dropZoneElement.appendChild(thumbnailElement);
+											}
+			
+											thumbnailElement.dataset.label = file.name;
+			
+											// Show thumbnail for image files
+											if (file.type.startsWith("image/")) {
+												const reader = new FileReader();
+			
+												reader.readAsDataURL(file);
+												reader.onload = () => {
+													thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+												};
+											} else {
+												alert("Please upload an image-type file.")
+												thumbnailElement.style.backgroundImage = null;
+											}
+			
+										}
+			
+										let checkSize = function(threshold) {
+											const file_size_raw = realFileBtn.files.item(0).size;
+											const file_size = Math.round((file_size_raw / 1024));
+											return file_size < threshold;
+										};
+			
+			
+										const uploadBtn = document.getElementById("upload-file");
+			
+										`uploadBtn.addEventListener("click", function() {
+											if (realFileBtn.files.length > 0) {
+												if (!checkSize(100)) {
+													alert("File exceeds maximum memory allowance of 100kb.");
+													realFileBtn.value = "";
+													location.reload();
+												} else {
+													// Check extensions
+													let ext = realFileBtn.value.split('.').pop();
+													if (ext != "jpg" && ext != "jpeg") {
+														alert("Invalid file type: " + ext + ". File must be either .jpg or .jpeg formats");
+														realFileBtn.value = "";
+														location.reload();
+													} else {
+														updateThumbnail(dropZoneElement, inputElement.files[0]);
+														
+														}
+													
+												}
+							
+											}
+											else {
+												alert("No file uploaded.")
+												location.reload();
+											}
+										});`
+									
+									</script>
+									<script>
+										function predict() {
+      									fetch({{ url_for('predict')|tojson }}, {
+       									 method: 'POST',
+										 body: new FormData(this)
+										})
+										 .then(parseJSON)
+										 .then(addShow);
+										}
+
+										function parseJSON(response) {
+										return response.json();
+										}
+
+										function addShow(data) {
+										var span = document.getElementById('result');
+										span.innerText = data.prediction;
+										}
+									</script>
+								</form>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<h3>Count</h3>
+								</header>
+								<span>Count is <span id="result"></span></span>	
+								</div>
+								<br>
+								<br>
+								<div>
+									<div id="density">
+
+									</div>
+								</div>
+								<br>
+								
+								</form>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
+
+		<!-- Main -->
+			<section id="main" class="wrapper">
+				<div class="inner">
+				
+
+
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<div class="content">
+						<section>
+							<h3>Thank You (This is the Footer)</h3>
+							<p>What to put here?</p>
+						</section>
+						<section>
+							<h4>We can add things here too</h4>
+							<ul class="alt">
+								<li><a href="#">Example 1</a></li>
+								<li><a href="#">Example 2</a></li>
+								<li><a href="#">Example 3</a></li>
+								<li><a href="#">Example 4</a></li>
+							</ul>
+						</section>
+						<section>
+							<h4>Social Media </h4>
+							<ul class="plain">
+								<li><a href="#"><i class="icon fa-twitter">&nbsp;</i>Twitter</a></li>
+								<li><a href="#"><i class="icon fa-facebook">&nbsp;</i>Facebook</a></li>
+								<li><a href="#"><i class="icon fa-instagram">&nbsp;</i>Instagram</a></li>
+								<li><a href="#"><i class="icon fa-github">&nbsp;</i>Github</a></li>
+							</ul>
+						</section>
+					</div>
+					
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="static/assets/js/jquery.min.js"></script>
+			<script src="static/assets/js/browser.min.js"></script>
+			<script src="static/assets/js/breakpoints.min.js"></script>
+			<script src="static/assets/js/util.js"></script>
+			<script src="static/assets/js/main.js"></script>
+			<script src="https://unpkg.com/promise-polyfill@7.1.2/dist/polyfill.min.js"></script>
+ 			<script src="https://unpkg.com/whatwg-fetch@2.0.4/fetch.js"></script>
+
+	</body>
+</html>
