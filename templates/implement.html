@@ -57,7 +57,7 @@
 										<span class="drop-zone__prompt">Drop file here or click to upload</span>
 										<input type="file" name="file" class="drop-zone__input" id="input-file">
 									</div>
-									<p><input type="submit" value="Upload Image" name="submit" id="upload-file" onclick=predict()></p>
+									<p><input type="button" value="Upload Image" name="submit" id="upload-file" onclick=predict()></p>
 			
 									<script type="text/javascript">
 										const realFileBtn = document.getElementById("input-file");
@@ -176,9 +176,11 @@
 									</script>
 									<script>
 										function predict() {
+										const formData = new FormData()
+										formData.append('file',realFileBtn.files[0])
       									fetch({{ url_for('predict')|tojson }}, {
        									 method: 'POST',
-										 body: new FormData(this)
+										 body: formData
 										})
 										 .then(parseJSON)
 										 .then(addShow);
@@ -190,26 +192,26 @@
 
 										function addShow(data) {
 										var span = document.getElementById('result');
-										span.innerText = data.prediction;
+										span.innerText = data[0];
+										console.log(data[0]);
+										var density=document.createElement("img");
+										density.setAttribute("src", data[1]);
+										var predictions1 = document.getElementById('predictions');
+										predictions.appendChild(density);
 										}
 									</script>
 								</form>
 							</div>
 						</section>
 						<section>
-							<div class="content">
+							<div class="content" id="predictions">
 								<header>
 									<h3>Count</h3>
 								</header>
 								<span>Count is <span id="result"></span></span>	
-								</div>
 								<br>
 								<br>
-								<div>
-									<div id="density">
-
-									</div>
-								</div>
+								
 								<br>
 								
 								</form>

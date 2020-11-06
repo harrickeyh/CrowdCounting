@@ -18,7 +18,7 @@ def index():
 
 @app.route('/implement.html')
 def implement():
-    if request.method == 'POST':         #remove this entire if part if not doing fetch
+    '''if request.method == 'POST':         #remove this entire if part if not doing fetch
         # Remove existing images in directory
         files_in_dir = os.listdir(app.config['UPLOAD_FOLDER'])
         filtered_files = [file for file in files_in_dir if file.endswith(".jpg") or file.endswith(".jpeg")]
@@ -38,7 +38,7 @@ def implement():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         prediction, density = get_prediction(file)
-        return render_template('impiement.html',)
+        return render_template('impiement.html',)'''
     return render_template('implement.html')
 
 @app.route('/others.html')
@@ -47,7 +47,7 @@ def others():
 
 
 # Remove ''' below to try to use my code for fetch
-'''@app.route('/predict', methods=["GET","POST"])          
+@app.route('/predict', methods=["GET","POST"])          
 def predict():
     if request.method == 'POST':
         # Remove existing images in directory
@@ -56,20 +56,24 @@ def predict():
         for file in filtered_files:
             path = os.path.join(app.config['UPLOAD_FOLDER'], file)
             os.remove(path)
+            print("FIle remove")
 
         # Upload new file
         if 'file' not in request.files:
+            print("not in file")
             return redirect(request.url)
         file = request.files['file']
 
         if not file:
+            print("not file")
             return
         
         print("Getting Prediction")
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         prediction, density = get_prediction(file)
-        return jsonify(prediction, density)'''
+    
+        return jsonify(prediction, density)
 
 if __name__ == '__main__':
     app.run(debug=True)

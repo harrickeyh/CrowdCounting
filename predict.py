@@ -35,5 +35,5 @@ def get_prediction(file):
     x=random.randint(1,100)
     density = 'static/density_map'+str(x)+'.jpg'
     im.save(density)
-    return prediction,density
+    return prediction, density
 
