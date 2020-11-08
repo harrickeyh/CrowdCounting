@@ -32,7 +32,7 @@ def get_prediction(file):
     im = Image.fromarray(np.uint8(CM.jet(norm)*255)) # apply colormap
     if im.mode != 'RGB': # prevent oserror
         im = im.convert('RGB')
-    x=random.randint(1,100)
+    x=random.randint(1,10000)
     density = 'static/density_map'+str(x)+'.jpg'
     im.save(density)
     return prediction, density

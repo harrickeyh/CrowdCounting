@@ -16,15 +16,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def index():
     return render_template('index.html')
 
-@app.route('/implement.html')
-def implement():
-    return render_template('implement.html')
-
-@app.route('/others.html')
-def others():
-    return render_template('others.html')
-
-
 # Fetch API
 @app.route('/predict', methods=["GET","POST"])          
 def predict():
