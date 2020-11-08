@@ -6,14 +6,7 @@ This project is an academic project for the module EE3080 Design & Innovation Pr
 
 ## Acknoledgements
 ### Group Members:
-Lim Si Ping
-Chua Zhong En
-Govil Samriddhi
-Ronn Chan
-Justin Tan
-Muhammad Aidil
-Tan Ding Hao
-Harrick (Me)
+Lim Si Ping, Chua Zhong En, Govil Samriddhi, Ronn Chan, Justin Tan, Muhammad Aidil, Tan Ding Hao, Harrick (Me)
 
 ### Supervisors / Mentors:
 Professor Jiang Xu Dong
