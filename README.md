@@ -16,8 +16,8 @@ This project is an academic project for the module EE3080 Design & Innovation Pr
 * Harrick (Me)
 
 ### Supervisors / Mentors:
-Professor Jiang Xu Dong
-Teaching Assistant / PhD Student Liu Chang
+* Professor Jiang Xu Dong
+* Teaching Assistant / PhD Student Liu Chang
 
 ### References & Credits
 * This project was developed using the repository of [jaysondale](https://github.com/jaysondale/Size.AI-Deployment).
