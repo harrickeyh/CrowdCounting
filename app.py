@@ -2,7 +2,7 @@ import os
 
 from flask import jsonify
 from flask import Flask, render_template, request, redirect, url_for
-from predict import get_prediction #Get prediction inference.py
+from predict import get_prediction #Get prediction from predict.py
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = './static/'

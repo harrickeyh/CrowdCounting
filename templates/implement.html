@@ -7,7 +7,7 @@
 <style>
     #note{color: #444444}
     #result{font-weight: bold;}
-	img{height:100%; width:100%; object-fit:cover;}
+    img{height:100%; width:100%; object-fit:cover;}
 </style>
 <html>
 
@@ -250,10 +250,7 @@
         function predict() {
             const formData = new FormData()
             formData.append('file',realFileBtn.files[0])
-            fetch({{url_for('predict')|tojson}}, {
-                method: 'POST',
-                body: formData
-            })
+            fetch({{url_for('predict')|tojson}}, {method: 'POST', body: formData})
             .then(parseJSON)
             .then(addShow);
                             }
