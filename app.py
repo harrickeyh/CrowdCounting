@@ -18,27 +18,6 @@ def index():
 
 @app.route('/implement.html')
 def implement():
-    '''if request.method == 'POST':         #remove this entire if part if not doing fetch
-        # Remove existing images in directory
-        files_in_dir = os.listdir(app.config['UPLOAD_FOLDER'])
-        filtered_files = [file for file in files_in_dir if file.endswith(".jpg") or file.endswith(".jpeg")]
-        for file in filtered_files:
-            path = os.path.join(app.config['UPLOAD_FOLDER'], file)
-            os.remove(path)
-
-        # Upload new file
-        if 'file' not in request.files:
-            return redirect(request.url)
-        file = request.files['file']
-
-        if not file:
-            return
-        
-        print("Getting Prediction")
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        prediction, density = get_prediction(file)
-        return render_template('impiement.html',)'''
     return render_template('implement.html')
 
 @app.route('/others.html')
@@ -46,7 +25,7 @@ def others():
     return render_template('others.html')
 
 
-# Remove ''' below to try to use my code for fetch
+# Fetch API
 @app.route('/predict', methods=["GET","POST"])          
 def predict():
     if request.method == 'POST':
@@ -72,10 +51,10 @@ def predict():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         prediction, density = get_prediction(file)
-    
-        return jsonify(prediction, density)
+        originalimage='static/'+filename
+        return jsonify(prediction, density, originalimage)
 
 if __name__ == '__main__':
     app.run(debug=True)
 
-## end of line 1
+#End of code

@@ -6,6 +6,7 @@
 -->
 <style>
 	#result{font-weight: bold;}
+	img{height:100%; width:100%; object-fit:cover;}
 </style>
 <html>
 	<head>
@@ -175,30 +176,28 @@
 									
 									</script>
 									<script>
-										function predict() {
+									function predict() {
 										const formData = new FormData()
 										formData.append('file',realFileBtn.files[0])
-      									fetch({{ url_for('predict')|tojson }}, {
-       									 method: 'POST',
-										 body: formData
+										fetch({{url_for('predict')|tojson}}, {
+											method: 'POST',
+											body: formData
 										})
-										 .then(parseJSON)
-										 .then(addShow);
-										}
-
-										function parseJSON(response) {
+										.then(parseJSON)
+										.then(addShow);
+														}
+									
+									function parseJSON(response) 
+									{
 										return response.json();
-										}
-
-										function addShow(data) {
-										var span = document.getElementById('result');
-										span.innerText = data[0];
-										console.log(data[0]);
-										var density=document.createElement("img");
-										density.setAttribute("src", data[1]);
-										var predictions1 = document.getElementById('predictions');
-										predictions.appendChild(density);
-										}
+									}
+									
+									function addShow(data) 
+									{
+										document.getElementById('result').innerText= "Predicted Count is " + data[0];
+										document.getElementById('predictions1').innerHTML='<img src="'+data[2]+'">'
+										document.getElementById('predictions2').innerHTML='<img src="'+data[1]+'">'
+									}
 									</script>
 								</form>
 							</div>
@@ -206,15 +205,11 @@
 						<section>
 							<div class="content" id="predictions">
 								<header>
-									<h3>Count</h3>
+									<h3>Prediction</h3>
 								</header>
-								<span>Count is <span id="result"></span></span>	
-								<br>
-								<br>
-								
-								<br>
-								
-								</form>
+								<span><span id="result"></span></span>	
+								<div> <div id="predictions1"></div></div>
+								<div> <div id="predictions2"></div></div>
 							</div>
 						</section>
 					</div>
@@ -269,6 +264,5 @@
 			<script src="static/assets/js/main.js"></script>
 			<script src="https://unpkg.com/promise-polyfill@7.1.2/dist/polyfill.min.js"></script>
  			<script src="https://unpkg.com/whatwg-fetch@2.0.4/fetch.js"></script>
-
 	</body>
 </html>
