@@ -16,6 +16,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def index():
     return render_template('index.html')
 
+@app.route('/implement.html')
+def implement():
+    return render_template('implement.html')
+
 # Fetch API
 @app.route('/predict', methods=["GET","POST"])          
 def predict():
@@ -26,7 +30,7 @@ def predict():
         for file in filtered_files:
             path = os.path.join(app.config['UPLOAD_FOLDER'], file)
             os.remove(path)
-            print("FIle remove")
+            print("File remove")
 
         # Upload new file
         if 'file' not in request.files:
