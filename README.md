@@ -20,6 +20,6 @@ Professor Jiang Xu Dong
 Teaching Assistant / PhD Student Liu Chang
 
 ### References & Credits
-* This project was developed using the repository of (jaysondale)[https://github.com/jaysondale/Size.AI-Deployment].
-* This project was fulfilled with the help of my groupmates, Liu Chang, and (Melvin Kok)[https://github.com/melvinkokxw].
+* This project was developed using the repository of [jaysondale](https://github.com/jaysondale/Size.AI-Deployment).
+* This project was fulfilled with the help of my groupmates, Liu Chang, and [Melvin Kok](https://github.com/melvinkokxw).
 
