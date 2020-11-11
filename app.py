@@ -26,7 +26,7 @@ def predict():
     if request.method == 'POST':
         # Remove existing images in directory
         files_in_dir = os.listdir(app.config['UPLOAD_FOLDER'])
-        filtered_files = [file for file in files_in_dir if file.endswith(".jpg") or file.endswith(".jpeg")]
+        filtered_files = [file for file in files_in_dir if file.endswith(".jpg") or file.endswith(".jpeg") or file.endswith(".png")]
         for file in filtered_files:
             path = os.path.join(app.config['UPLOAD_FOLDER'], file)
             os.remove(path)
@@ -45,9 +45,9 @@ def predict():
         print("Getting Prediction")
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        prediction, density = get_prediction(file)
+        prediction, densitymap = get_prediction(file)
         originalimage='static/'+filename
-        return jsonify(prediction, density, originalimage)
+        return jsonify(str(prediction), densitymap, originalimage)
 
 if __name__ == '__main__':
     app.run(debug=True)

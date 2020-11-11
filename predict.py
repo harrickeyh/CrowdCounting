@@ -14,26 +14,31 @@ from torchvision import transforms
 import random
 
 model = CSRNet()
-checkpoint = torch.load('./model.pt', map_location='cpu')
+model.cuda()
+checkpoint = torch.load('./model2.pth.tar')
 model.load_state_dict(checkpoint['state_dict'])
 model.eval()
 
-transform = transforms.Compose([transforms.ToTensor()])
+transform = transforms.Compose([transforms.ToTensor(),transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229,0.224,0.225]),])
 def get_prediction(file):
-    img = Image.open(file).convert('RGB') #Get prediction
-    img = transform(img)
-    img = img.unsqueeze(0)
+    frame = Image.open(file).convert('RGB') #Get prediction
+    width , height = frame.size
+    img = transform(frame).unsqueeze(0).cuda()
 
-    output = model(img)
-    prediction = int(output.detach().cpu().sum().numpy())
-    temp = np.asarray(output.detach().cpu().reshape(output.detach().cpu().shape[2],output.detach().cpu().shape[3]))
-
-    norm = temp / temp.max() # normalize 0 to 1
-    im = Image.fromarray(np.uint8(CM.jet(norm)*255)) # apply colormap
-    if im.mode != 'RGB': # prevent oserror
-        im = im.convert('RGB')
+    # generate count
+    density = model(img).data.cpu().numpy()
+    prediction = density.sum()
+    prediction = int(prediction)
+    
+    #normalize density
+    density_min = np.min(density,axis=tuple(range(density.ndim-1)),keepdims=1)
+    density_max = np.max(density,axis=tuple(range(density.ndim-1)),keepdims=1)
+    density = (density - density_min) / (density_max - density_min)
+    im = Image.fromarray((CM.jet(density.squeeze())*255).astype(np.uint8)) # apply colormap and transparency
+    im=im.resize((width,height))
+    frame.paste(im, (0, 0), im)
     x=random.randint(1,10000)
-    density = 'static/density_map'+str(x)+'.jpg'
-    im.save(density, subsampling=0, quality=100)
-    return prediction, density
+    densitymap = 'static/density_map'+str(x)+'.png'
+    im.save(densitymap, subsampling=0, quality=100)
+    return prediction, densitymap
 
