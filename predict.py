@@ -15,7 +15,7 @@ import random
 
 model = CSRNet()
 model.cuda()
-checkpoint = torch.load('./model2.pth.tar')
+checkpoint = torch.load('./model.pt')
 model.load_state_dict(checkpoint['state_dict'])
 model.eval()
 
