@@ -34,6 +34,6 @@ def get_prediction(file):
         im = im.convert('RGB')
     x=random.randint(1,10000)
     density = 'static/density_map'+str(x)+'.jpg'
-    im.save(density)
+    im.save(density, subsampling=0, quality=100)
     return prediction, density
 
