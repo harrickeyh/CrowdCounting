@@ -34,11 +34,12 @@ def get_prediction(file):
     density_min = np.min(density,axis=tuple(range(density.ndim-1)),keepdims=1)
     density_max = np.max(density,axis=tuple(range(density.ndim-1)),keepdims=1)
     density = (density - density_min) / (density_max - density_min)
-    im = Image.fromarray((CM.jet(density.squeeze())*255).astype(np.uint8)) # apply colormap and transparency
+    im = Image.fromarray((CM.jet(density.squeeze())*255).astype(np.uint8)) # apply colormap 
+    im.putalpha(128)  # apply transparency
     im=im.resize((width,height))
     frame.paste(im, (0, 0), im)
     x=random.randint(1,10000)
     densitymap = 'static/density_map'+str(x)+'.png'
-    im.save(densitymap, subsampling=0, quality=100)
+    frame.save(densitymap, subsampling=0, quality=100)
     return prediction, densitymap
 
